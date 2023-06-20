@@ -2,12 +2,14 @@ package org.example;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+import java.util.Map;
+
 public class FraudDetectorService {
 
     public static void main(String[] args) {
         var fraudDetectorService = new FraudDetectorService();
         try (var service = new KafkaService<Order>(FraudDetectorService.class.getSimpleName(),
-                "ECOMMERCE_NEW_ORDER", fraudDetectorService::parse, Order.class)) {
+                "ECOMMERCE_NEW_ORDER", fraudDetectorService::parse, Order.class, Map.of())) {
             service.run();
         }
 

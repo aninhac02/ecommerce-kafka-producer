@@ -7,6 +7,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Properties;
 
 public class EmailService {
@@ -14,7 +15,7 @@ public class EmailService {
     public static void main(String[] args) {
         var emailService = new EmailService();
         try (var service = new KafkaService(EmailService.class.getSimpleName(),
-                "ECOMMERCE_SEND_EMAIL", emailService::parse, Email.class)) {
+                "ECOMMERCE_SEND_EMAIL", emailService::parse, Email.class, Map.of())) {
             service.run();
         }
 
